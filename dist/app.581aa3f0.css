@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  color: #333333;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.4;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+.is-active {
+  font-weight: bold;
+}
+
+.square-container {
+  width: 180px;
+  height: 180px;
+  border: 2px solid #333333;
+  border-radius: 3px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.square {
+  border: 2px solid #333333;
+  border-radius: 3px;
+  width: 50px;
+  height: 50px;
+}
+
+/*# sourceMappingURL=/app.581aa3f0.css.map */

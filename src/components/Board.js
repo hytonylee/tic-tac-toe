@@ -8,7 +8,17 @@ export default class Board extends React.Component {
             <div>
                 <h1>Tic Tac Toe</h1>
                 <Menu />
-                <Square />
+                <div className='square-container'>
+                    <Square />
+                    <Square />
+                    <Square />
+                    <Square />
+                    <Square />
+                    <Square />
+                    <Square />
+                    <Square />
+                    <Square />
+                </div>
             </div>
         )
     }
