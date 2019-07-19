@@ -25884,9 +25884,17 @@ function (_React$Component) {
   _createClass(Board, [{
     key: "render",
     value: function render() {
+      var boxes = [];
+
+      for (var i = 0; i < 9; i++) {
+        boxes.push(_react.default.createElement(_Square.default, {
+          key: i
+        }));
+      }
+
       return _react.default.createElement("div", null, _react.default.createElement("h1", null, "Tic Tac Toe"), _react.default.createElement(_Menu.default, null), _react.default.createElement("div", {
         className: "square-container"
-      }, _react.default.createElement(_Square.default, null), _react.default.createElement(_Square.default, null), _react.default.createElement(_Square.default, null), _react.default.createElement(_Square.default, null), _react.default.createElement(_Square.default, null), _react.default.createElement(_Square.default, null), _react.default.createElement(_Square.default, null), _react.default.createElement(_Square.default, null), _react.default.createElement(_Square.default, null)));
+      }, boxes));
     }
   }]);
 
@@ -26010,7 +26018,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49943" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50254" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
