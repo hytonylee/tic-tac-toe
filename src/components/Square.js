@@ -1,12 +1,35 @@
 import React from 'react'
 
-export default class Square extends React.Component {
+
+class Square extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handleClick = this.handleClick.bind(this)
+
+        this.state = {
+            isClick: false
+        }
+    }
+
+    handleClick() {
+        this.setState(prevState => {
+            return {
+                isClick: true,
+
+            }
+        })
+
+        console.log('checked!!')
+    }
 
     render() {
         return (
-            <div className="square" onClick={() => { console.log('alert') }} value={this.props.value}>
-                {this.props.value}
-            </div>
+            <button className="square" onClick={this.handleClick} value={this.state.value}>
+                {this.state.isClick}
+            </button>
         )
     }
 }
+
+
+export default Square;

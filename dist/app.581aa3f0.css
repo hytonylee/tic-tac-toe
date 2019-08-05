@@ -2,11 +2,8 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 62.5%;
-}
-
 body {
+  font-size: 62.5%;
   color: #333333;
   font-family: "Open Sans", sans-serif;
   line-height: 1.4;
@@ -40,6 +37,22 @@ button:disabled {
   border-radius: 3px;
   width: 50px;
   height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.square .square-content {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.board-container {
+  display: grid;
+}
+
+.board-title {
+  font-weight: 1000;
+  color: red;
 }
 
 /*# sourceMappingURL=/app.581aa3f0.css.map */
