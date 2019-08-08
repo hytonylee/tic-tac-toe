@@ -25800,9 +25800,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -25813,37 +25813,23 @@ var Square =
 function (_React$Component) {
   _inherits(Square, _React$Component);
 
-  function Square(props) {
-    var _this;
-
+  function Square() {
     _classCallCheck(this, Square);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Square).call(this, props));
-    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
-    _this.state = {
-      isClick: false
-    };
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Square).apply(this, arguments));
   }
 
   _createClass(Square, [{
-    key: "handleClick",
-    value: function handleClick() {
-      this.setState(function (prevState) {
-        return {
-          isClick: true
-        };
-      });
-      console.log('checked!!');
-    }
-  }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       return _react.default.createElement("button", {
         className: "square",
-        onClick: this.handleClick,
-        value: this.state.value
-      }, this.state.isClick);
+        onClick: function onClick() {
+          return _this.props.onClick();
+        }
+      }, this.props.value);
     }
   }]);
 
@@ -25957,9 +25943,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -25970,22 +25956,47 @@ var Board =
 function (_React$Component) {
   _inherits(Board, _React$Component);
 
-  function Board() {
+  function Board(props) {
+    var _this;
+
     _classCallCheck(this, Board);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Board).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Board).call(this, props));
+    _this.state = {
+      squares: Array(9).fill(null)
+    };
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Board, [{
+    key: "handleClick",
+    value: function handleClick(i) {
+      var squares = this.state.squares;
+      squares[i] = 'X';
+      this.setState({
+        squares: squares
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var boxes = [];
 
-      for (var i = 0; i < 9; i++) {
+      var _loop = function _loop(i) {
         boxes.push(_react.default.createElement(_Square.default, {
           key: i,
-          value: i
+          value: _this2.state.squares[i],
+          onClick: function onClick() {
+            return _this2.handleClick(i);
+          }
         }));
+      };
+
+      for (var i = 0; i < 9; i++) {
+        _loop(i);
       }
 
       return _react.default.createElement(_ErrorBoundary.default, null, _react.default.createElement("div", {
@@ -26118,7 +26129,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59253" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49552" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
