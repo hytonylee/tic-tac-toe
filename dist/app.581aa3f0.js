@@ -25790,55 +25790,53 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var Square =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Square, _React$Component);
-
-  function Square() {
-    _classCallCheck(this, Square);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Square).apply(this, arguments));
-  }
-
-  _createClass(Square, [{
-    key: "render",
-    value: function render() {
-      var _this = this;
-
-      return _react.default.createElement("button", {
-        className: "square",
-        onClick: function onClick() {
-          return _this.props.onClick();
-        }
-      }, this.props.value);
+var Square = function Square(props) {
+  return _react.default.createElement("button", {
+    className: "square",
+    onClick: function onClick() {
+      return props.onClick();
     }
-  }]);
-
-  return Square;
-}(_react.default.Component);
+  }, props.value);
+};
 
 var _default = Square;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"../src/components/ErrorBoundary.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js"}],"../src/utilities/winCondition.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var winCondition = function winCondition(squares) {
+  var winRow = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+
+  for (var i = 0; i < winRow.length; i++) {
+    var _winRow$i = _slicedToArray(winRow[i], 3),
+        a = _winRow$i[0],
+        b = _winRow$i[1],
+        c = _winRow$i[2];
+
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+
+  return null;
+};
+
+var _default = winCondition;
+exports.default = _default;
+},{}],"../src/components/ErrorBoundary.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25929,6 +25927,8 @@ var _Menu = _interopRequireDefault(require("./Menu"));
 
 var _Square = _interopRequireDefault(require("./Square"));
 
+var _winCondition = _interopRequireDefault(require("../utilities/winCondition"));
+
 var _ErrorBoundary = _interopRequireDefault(require("./ErrorBoundary"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -25963,7 +25963,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Board).call(this, props));
     _this.state = {
-      squares: Array(9).fill(null)
+      squares: Array(9).fill(null),
+      playerOne: true
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
@@ -25972,16 +25973,24 @@ function (_React$Component) {
   _createClass(Board, [{
     key: "handleClick",
     value: function handleClick(i) {
-      var squares = this.state.squares;
-      squares[i] = 'X';
+      var squares = this.state.squares.slice();
+      squares[i] === null ? squares[i] = this.state.playerOne ? 'X' : 'O' : console.log("you can't redo this!!");
       this.setState({
-        squares: squares
+        squares: squares,
+        playerOne: !this.state.playerOne
       });
+      console.log(this.state.squares);
     }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
+
+      var winStatus = (0, _winCondition.default)(this.state.squares);
+
+      var disabledSquare = function disabledSquare(i) {
+        !winStatus ? _this2.handleClick(i) : null;
+      };
 
       var boxes = [];
 
@@ -25990,7 +25999,7 @@ function (_React$Component) {
           key: i,
           value: _this2.state.squares[i],
           onClick: function onClick() {
-            return _this2.handleClick(i);
+            return disabledSquare(i);
           }
         }));
       };
@@ -26003,7 +26012,7 @@ function (_React$Component) {
         className: "board-container"
       }, _react.default.createElement("h1", {
         className: "board-header"
-      }, "Tic Tac Toe"), _react.default.createElement(_Menu.default, null), _react.default.createElement("div", {
+      }, "Tic Tac Toe"), winStatus, _react.default.createElement(_Menu.default, null), _react.default.createElement("div", {
         className: "square-container"
       }, boxes)));
     }
@@ -26013,7 +26022,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.default = Board;
-},{"react":"../node_modules/react/index.js","./Menu":"../src/components/Menu.js","./Square":"../src/components/Square.js","./ErrorBoundary":"../src/components/ErrorBoundary.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Menu":"../src/components/Menu.js","./Square":"../src/components/Square.js","../utilities/winCondition":"../src/utilities/winCondition.js","./ErrorBoundary":"../src/components/ErrorBoundary.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
