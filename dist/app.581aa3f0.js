@@ -25836,7 +25836,28 @@ var winCondition = function winCondition(squares) {
 
 var _default = winCondition;
 exports.default = _default;
-},{}],"../src/components/ErrorBoundary.js":[function(require,module,exports) {
+},{}],"../src/components/Status.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _winCondition = _interopRequireDefault(require("../utilities/winCondition"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Status = function Status(props) {
+  var winStatus = (0, _winCondition.default)(props.squares);
+  return _react.default.createElement("div", null, winStatus);
+};
+
+var _default = Status;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../utilities/winCondition":"../src/utilities/winCondition.js"}],"../src/components/ErrorBoundary.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25929,6 +25950,8 @@ var _Square = _interopRequireDefault(require("./Square"));
 
 var _winCondition = _interopRequireDefault(require("../utilities/winCondition"));
 
+var _Status = _interopRequireDefault(require("./Status"));
+
 var _ErrorBoundary = _interopRequireDefault(require("./ErrorBoundary"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -26012,7 +26035,9 @@ function (_React$Component) {
         className: "board-container"
       }, _react.default.createElement("h1", {
         className: "board-header"
-      }, "Tic Tac Toe"), winStatus, _react.default.createElement(_Menu.default, null), _react.default.createElement("div", {
+      }, "Tic Tac Toe"), winStatus, _react.default.createElement(_Status.default, {
+        squares: this.state.squares
+      }), _react.default.createElement(_Menu.default, null), _react.default.createElement("div", {
         className: "square-container"
       }, boxes)));
     }
@@ -26022,7 +26047,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.default = Board;
-},{"react":"../node_modules/react/index.js","./Menu":"../src/components/Menu.js","./Square":"../src/components/Square.js","../utilities/winCondition":"../src/utilities/winCondition.js","./ErrorBoundary":"../src/components/ErrorBoundary.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Menu":"../src/components/Menu.js","./Square":"../src/components/Square.js","../utilities/winCondition":"../src/utilities/winCondition.js","./Status":"../src/components/Status.js","./ErrorBoundary":"../src/components/ErrorBoundary.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {

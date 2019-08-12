@@ -2,6 +2,7 @@ import React from 'react';
 import Menu from './Menu';
 import Square from './Square';
 import winCondition from '../utilities/winCondition';
+import Status from './Status';
 import ErrorBoundary from './ErrorBoundary';
 
 
@@ -45,6 +46,7 @@ export default class Board extends React.Component {
                 <div className="board-container">
                     <h1 className="board-header">Tic Tac Toe</h1>
                     {winStatus}
+                    <Status squares={this.state.squares} />
                     <Menu />
                     <div className='square-container'>
                         {boxes}
