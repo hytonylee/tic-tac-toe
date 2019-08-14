@@ -45,7 +45,6 @@ export default class Board extends React.Component {
             <ErrorBoundary>
                 <div className="board-container">
                     <h1 className="board-header">Tic Tac Toe</h1>
-                    {winStatus}
                     <Status squares={this.state.squares} />
                     <Menu />
                     <div className='square-container'>

@@ -25852,7 +25852,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Status = function Status(props) {
   var winStatus = (0, _winCondition.default)(props.squares);
-  return _react.default.createElement("div", null, winStatus);
+  var winCaption;
+
+  if (winStatus === "X") {
+    winCaption = 'Player One is the Winner!!';
+  } else if (winStatus === "O") {
+    winCaption = 'Player Two is the Winner!!';
+  } else {
+    winCaption = 'No Winner yet!';
+  }
+
+  return _react.default.createElement("div", null, winCaption);
 };
 
 var _default = Status;
@@ -26035,7 +26045,7 @@ function (_React$Component) {
         className: "board-container"
       }, _react.default.createElement("h1", {
         className: "board-header"
-      }, "Tic Tac Toe"), winStatus, _react.default.createElement(_Status.default, {
+      }, "Tic Tac Toe"), _react.default.createElement(_Status.default, {
         squares: this.state.squares
       }), _react.default.createElement(_Menu.default, null), _react.default.createElement("div", {
         className: "square-container"
@@ -26163,7 +26173,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49552" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63077" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
