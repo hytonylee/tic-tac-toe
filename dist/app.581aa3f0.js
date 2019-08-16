@@ -26047,7 +26047,7 @@ function (_React$Component) {
         className: "board-header"
       }, "Tic Tac Toe"), _react.default.createElement(_Status.default, {
         squares: this.state.squares
-      }), _react.default.createElement(_Menu.default, null), _react.default.createElement("div", {
+      }), _react.default.createElement("div", {
         className: "square-container"
       }, boxes)));
     }

@@ -46,7 +46,7 @@ export default class Board extends React.Component {
                 <div className="board-container">
                     <h1 className="board-header">Tic Tac Toe</h1>
                     <Status squares={this.state.squares} />
-                    <Menu />
+                    {/* <Menu /> */}
                     <div className='square-container'>
                         {boxes}
                     </div>
